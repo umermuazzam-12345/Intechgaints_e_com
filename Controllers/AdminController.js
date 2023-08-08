@@ -13,13 +13,13 @@ cloudinary.config({
 // REGISTER A ADMIN 
 
 export const registerAdmin = async (req, res) => {
-    const { firstname, lastname, email, password, adminStatus } = req.body;
-    const file = req.files.photo;
+    const { firstname, lastname, email, password, adminStatus,image } = req.body;
+    // const file = req.files.photo;
 
-    cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
-        console.log(result);
+    // cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+    //     console.log(result);
 
-        const admin = new CustomerModel({ firstname, lastname, email, password, isadmin: adminStatus, image: result.url })
+        const admin = new CustomerModel({ firstname, lastname, email, password, isadmin: adminStatus, image })
         try {
             const allreadyAdmin = await CustomerModel.findOne({ isadmin: adminStatus })
             if (adminStatus && !allreadyAdmin) {
@@ -33,7 +33,7 @@ export const registerAdmin = async (req, res) => {
         } catch (error) {
             res.status(500).json(error)
         }
-    })
+    // })
 
 }
 

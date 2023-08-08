@@ -13,18 +13,17 @@ cloudinary.config({
 // REGISTER A SELLER 
 
 export const registerSeller=async(req,res)=>{
-    const {firstname,lastname,email,password}=req.body;
-    const file= req.files.photo;
+    const {firstname,lastname,email,password,image}=req.body; 
 
-    const seller= new SellerModel({firstname,lastname,email,password})
+    const seller= new SellerModel({firstname,lastname,email,password,image})
    
     try {
-        cloudinary.uploader.upload(file.tempFilePath,async(err,result)=>{
-            console.log(result);
-            seller.image=result.url
+        // cloudinary.uploader.upload(file.tempFilePath,async(err,result)=>{
+            // console.log(result);
+            // seller.image=result.url
             await seller.save()
             res.status(200).json(seller)
-        })
+        // })
     } catch (error) {
         res.status(500).json(error)
     }

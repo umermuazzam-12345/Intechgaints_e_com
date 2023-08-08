@@ -12,12 +12,11 @@ cloudinary.config({
 // REGISTER A PRODUCT 
 
 export const registeProduct = async (req, res) => {
-    const { title, desc, price, sellerid } = req.body;
-    const file = req.files.photo;
-    cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
-        console.log(result); 
+    const { title, desc, price, sellerid,image } = req.body; 
+    // cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+    //     console.log(result); 
         
-        const product = new ProductModel({ title, desc, price, sellerid, image:result.url })
+        const product = new ProductModel({ title, desc, price, sellerid, image })
 
         try {
             await product.save()
@@ -25,7 +24,7 @@ export const registeProduct = async (req, res) => {
         } catch (error) {
             res.status(500).json(error)
         }
-    })
+    // })
 }
 
 

@@ -1,24 +1,22 @@
 import CustomerModel from "../Models/customerModel.js";
 import jwt from 'jsonwebtoken'
 const secKey = "this is my string for jsonwebtoken"
-import { v2 as cloudinary } from 'cloudinary' 
-cloudinary.config({
-    cloud_name: 'dmrfmqbt0',
-    api_key: '315144386524555',
-    api_secret: '2sE8SIH-Es35ZWeap5ItQ65JgOA',
-    secure: true
-});
+// import { v2 as cloudinary } from 'cloudinary' 
+// cloudinary.config({
+//     cloud_name: 'dmrfmqbt0',
+//     api_key: '315144386524555',
+//     api_secret: '2sE8SIH-Es35ZWeap5ItQ65JgOA',
+//     secure: true
+// });
 // REGISTER A CUSTOMER 
 
 export const registerCustomer = async (req, res) => {
-    console.log(req.body);
-    const { firstname, lastname, email, password, image } = req.body;
-    console.log(req.body)
-    const file = image;
-    cloudinary.uploader.upload(file, async (err, result) => {
-        console.log(result);
+    // console.log(req.body); 
+    // const file = req.files.photo;
+    // console.log(file);
+    const { firstname, lastname, email, password } = req.body; 
 
-        const customer = new CustomerModel({ firstname, lastname, email, password, image: result.url })
+        const customer = new CustomerModel({ firstname, lastname, email, password})
 
         try {
             await customer.save()
@@ -27,8 +25,7 @@ export const registerCustomer = async (req, res) => {
             res.status(500).json(error)
         }
 
-    })
-}
+    }
 
 
 // LOGIN CUSTOMER 
