@@ -16,7 +16,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const app = express()
 app.use(express.json())
 app.use(cors())
-const port = 3000
+const port = 5000
 app.use(fileUpload({
   useTempFiles: true
 }));
