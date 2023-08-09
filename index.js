@@ -10,9 +10,11 @@ import path from 'path'
 import * as url from 'url';
 // const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+import dotenv from 'dotenv'
 
 
 
+dotenv.config()
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -21,6 +23,8 @@ app.use(fileUpload({
   useTempFiles: true
 }));
 
+const db= process.env.MONGODB_ATLAS
+console.log(db);
 app.use(express.static(path.join(__dirname, "./react1st/build")));
 console.log(__dirname);
 app.get("*", function (_, res) {
@@ -32,7 +36,7 @@ app.get("*", function (_, res) {
   );
 });
 
-mongoose.connect('mongodb://0.0.0.0:27017/e-commerce')
+mongoose.connect(db)
   .then(() => app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
   })).catch((err) => console.log(err))
