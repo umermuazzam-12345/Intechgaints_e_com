@@ -1,25 +1,13 @@
 import CustomerModel from "../Models/customerModel.js";
 import SellerModel from "../Models/sellerModel.js";
 import ProductModel from "../Models/productModel.js";
-import { v2 as cloudinary } from 'cloudinary'
-
-cloudinary.config({
-    cloud_name: 'dmrfmqbt0',
-    api_key: '315144386524555',
-    api_secret: '2sE8SIH-Es35ZWeap5ItQ65JgOA',
-    secure: true
-});
 
 // REGISTER A ADMIN 
 
 export const registerAdmin = async (req, res) => {
-    const { firstname, lastname, email, password, adminStatus,image } = req.body;
-    // const file = req.files.photo;
+    const { firstname, lastname, email, password, adminStatus } = req.body; 
 
-    // cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
-    //     console.log(result);
-
-        const admin = new CustomerModel({ firstname, lastname, email, password, isadmin: adminStatus, image })
+        const admin = new CustomerModel({ firstname, lastname, email, password, isadmin: adminStatus })
         try {
             const allreadyAdmin = await CustomerModel.findOne({ isadmin: adminStatus })
             if (adminStatus && !allreadyAdmin) {

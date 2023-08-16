@@ -12,22 +12,43 @@ cloudinary.config({
 // REGISTER A PRODUCT 
 
 export const registeProduct = async (req, res) => {
-    const { title, desc, price, sellerid,image } = req.body; 
-    // cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
-    //     console.log(result); 
-        
-        const product = new ProductModel({ title, desc, price, sellerid, image })
+    const { title, desc, price, sellerid,image } = req.body;
+    console.log("image: ",image);
+    console.log("req.body :", req.body)
+    const file = req.file
+    console.log("file : ", file);
+    // cloudinary.uploader.upload(file.path, async(err, result) => {
+    //     if (err) return console.log("Error : ", err);
+    //     console.log("Result : ", result);
 
-        try {
-            await product.save()
-            res.status(200).json(product)
-        } catch (error) {
-            res.status(500).json(error)
-        }
+    //     const product = new ProductModel({ title, desc, price, sellerid, image: result.url })
+    //     try {
+    //         await product.save()
+    //         res.status(200).json(product)
+    //     } catch (error) {
+    //         res.status(500).json(error)
+    //     }
     // })
+    res.send("Hello")
 }
 
+// GET ALL PRODUCTS 
+export const getProducts = async (req, res) => {
+    // cloudinary.uploader.upload(file.tempFilePath, async (err, result) => {
+    //     console.log(result); 
+    console.log("fetch products");
+    // const product = new ProductModel({ title, desc, price, sellerid, image })
 
+    try {
+        const products = await ProductModel.find({})
+
+        res.status(200).json(products)
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({ message: error.message })
+    }
+    // })
+}
 
 
 // DELETE A PRODUCT 

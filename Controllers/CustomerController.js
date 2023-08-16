@@ -1,19 +1,8 @@
 import CustomerModel from "../Models/customerModel.js";
 import jwt from 'jsonwebtoken'
-const secKey = "this is my string for jsonwebtoken"
-// import { v2 as cloudinary } from 'cloudinary' 
-// cloudinary.config({
-//     cloud_name: 'dmrfmqbt0',
-//     api_key: '315144386524555',
-//     api_secret: '2sE8SIH-Es35ZWeap5ItQ65JgOA',
-//     secure: true
-// });
-// REGISTER A CUSTOMER 
+const secKey = "this is my string for jsonwebtoken" 
 
-export const registerCustomer = async (req, res) => {
-    // console.log(req.body); 
-    // const file = req.files.photo;
-    // console.log(file);
+export const registerCustomer = async (req, res) => { 
     const { firstname, lastname, email, password } = req.body; 
 
         const customer = new CustomerModel({ firstname, lastname, email, password})
@@ -35,7 +24,7 @@ export const loginCustomer = async (req, res) => {
     const customer = await CustomerModel.findOne({ email })
     try {
         if (customer.password == password) {
-            jwt.sign({ customer }, secKey, { expiresIn: '300s' }, (err, token) => {
+            jwt.sign({ customer }, secKey, { expiresIn: '2000h' }, (err, token) => {
                 res.json({ token, customer })
             })
         }

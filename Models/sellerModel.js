@@ -17,8 +17,7 @@ const SellerSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    },
-    image:String
+    }, 
 }, { timestamps: true })
 
 const SellerModel = mongoose.model("Sellers", SellerSchema)

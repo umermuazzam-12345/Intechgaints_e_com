@@ -18,15 +18,10 @@ const CustomerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image:String,
     isadmin: {
         type: Boolean,
         default: false
     },
-    isCustomer: {
-        type: Boolean,
-        default: false
-    }
 }, { timestamps: true })
 
 const CustomerModel = mongoose.model("Customers", CustomerSchema)

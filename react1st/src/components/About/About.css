@@ -1,0 +1,17 @@
+
+.main{
+    background-image: url('aboutbg.jpg');
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.content{ 
+    padding-top: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+p{
+    width: 1000px;
+}
